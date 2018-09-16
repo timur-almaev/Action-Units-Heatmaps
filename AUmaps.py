@@ -38,6 +38,8 @@ class AUdetector:
         if isinstance(image, str):
             image = cv2.cvtColor(cv2.imread(image), cv2.COLOR_BGR2RGB)
         dets = self.detector(image)
+        if len(dets) == 0:
+            return [], [], []
         shape = self.predictor(image,dets[0])
         coords = np.zeros((68, 2), dtype='float')
         for i in range(0,68):
