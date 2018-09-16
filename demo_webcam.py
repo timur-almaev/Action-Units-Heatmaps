@@ -73,13 +73,13 @@ def main():
 					os.system('cls')
 				else:
 					os.system('clear')
-				# Print AU description
+				# Print AU description: https://www.cs.cmu.edu/~face/facs.htm
 				print('')
-				print(' ** AU06')
-				print(' ** AU10')
-				print(' ** AU12')
-				print(' ** AU14')
-				print(' ** AU17')
+				print(' ** AU06 : Cheek Raiser')
+				print(' ** AU10 : Upper Lip Raiser')
+				print(' ** AU12 : Lip Corner Puller (Smile)')
+				print(' ** AU14 : Dimpler')
+				print(' ** AU17 : Chin Raiser')
 
 				# Print table hat
 				sys.stdout.write("  _______________________________________________________________________ \n")
