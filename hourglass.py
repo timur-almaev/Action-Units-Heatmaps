@@ -104,7 +104,7 @@ class FullNetwork(nn.Module):
         self.conv4 = Bottleneck(128, 256,1,downsample)
 
         for hg_module in range(self.num_modules):
-            print(hg_module)
+            # print(hg_module)
             self.add_module('m' + str(hg_module), HourGlass(1, 4, 256))
             self.add_module('top_m_' + str(hg_module), Bottleneck(256, 256))
             self.add_module('conv_last' + str(hg_module),

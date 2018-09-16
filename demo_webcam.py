@@ -16,6 +16,7 @@ def main():
 	if len(sys.argv) > 1 and sys.argv[1] == '-q':
 		verbose = False
 
+	print(' ** Loading model ... ')
 	AUdetector = AUmaps.AUdetector('shape_predictor_68_face_landmarks.dat', enable_cuda=True)
 	cam = cv2.VideoCapture(0)
 
@@ -55,7 +56,7 @@ def main():
 			pred,map,img = AUdetector.detectAU(img)
 
 			if len(pred) == 0:
-				sys.stdout.write("\r ** No face found!%40s" % '')
+				sys.stdout.write("\r |   FALSE    |   --   |   --   |   --   |   --   |   --   |     --      |")
 				sys.stdout.flush()
 				continue
 
@@ -65,6 +66,9 @@ def main():
 					os.system('cls')
 				else:
 					os.system('clear')
+				# Print table hat
+				sys.stdout.write("  _______________________________________________________________________ \n")
+				sys.stdout.write(" | Face Found |  AU06  |  AU10  |  AU12  |  AU14  |  AU17  | FPS Elapsed |\n")
 
 			if verbose:
 				for j in range(0,5):
@@ -90,7 +94,8 @@ def main():
 				plt.draw()
 
 			elapsed_time = 1.0 / (time.time() - start_time)
-			sys.stdout.write("\r ** FPS Elapsed: %.3f" % elapsed_time)
+			sys.stdout.write("\r |    TRUE    | %6.3f | %6.3f | %6.3f | %6.3f | %6.3f |   %7.3f   |"
+			 % (pred[0], pred[1], pred[2], pred[3], pred[4], elapsed_time))
 			sys.stdout.flush()
 
 	except KeyboardInterrupt:
