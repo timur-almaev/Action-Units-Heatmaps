@@ -20,15 +20,22 @@ def main():
 	AUdetector = AUmaps.AUdetector('shape_predictor_68_face_landmarks.dat', enable_cuda=True)
 	cam = cv2.VideoCapture(0)
 
-	fig = plt.figure(figsize=plt.figaspect(.5))
+	fig = plt.figure(figsize=plt.figaspect(2.5))
 	fig.canvas.mpl_connect('close_event', handle_close)
 	axs = fig.subplots(5, 2)
 
 	# Init subplots and images within
 	implots = []
+	autitles = ['AU06', 'AU10', 'AU12', 'AU14', 'AU17']
+	axc = 0
+	axt = 0
 	for ax in axs.reshape(-1):
-	    ax.axis('off')
-	    implots.append(ax.imshow(np.zeros((256, 256))))
+		ax.axis('off')
+		ax.set_title(autitles[axc])
+		if (axt % 2) != 0:
+			axc += 1
+		axt += 1
+		implots.append(ax.imshow(np.zeros((256, 256))))
 
 	clearscr = True
 	try:
@@ -66,6 +73,14 @@ def main():
 					os.system('cls')
 				else:
 					os.system('clear')
+				# Print AU description
+				print('')
+				print(' ** AU06')
+				print(' ** AU10')
+				print(' ** AU12')
+				print(' ** AU14')
+				print(' ** AU17')
+
 				# Print table hat
 				sys.stdout.write("  _______________________________________________________________________ \n")
 				sys.stdout.write(" | Face Found |  AU06  |  AU10  |  AU12  |  AU14  |  AU17  | FPS Elapsed |\n")
@@ -108,7 +123,7 @@ def main():
 	# cv2.destroyAllWindows()
 
 	telapsed_time = time.time() - tstart_time
-	print('\n ** Mean FPS Elapsed: {0:.3f} \n'.format(1.0 / (telapsed_time / nframes)))
+	print('\n\n ** Mean FPS Elapsed: {0:.3f} \n'.format(1.0 / (telapsed_time / nframes)))
 
 if __name__ == "__main__":
     main()
